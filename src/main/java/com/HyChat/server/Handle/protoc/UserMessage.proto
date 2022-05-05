@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "com.HyChat.server.Handle";
+
+message UserMessage {
+    string Admin =1;
+    string PassWord =2;
+}

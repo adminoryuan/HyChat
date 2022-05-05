@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-option java_package = "com.HyChat.server.Handle.protoc";
+option java_package = "com.HyChat.server.Handle";
 
 message MegBody {
     int32 MegType=1;
     string Target =4;
-    string thenUser=5;
+    string token=5;
     string time=2;
-    repeated bytes Body=3;
+    bytes Body=3;
 }

@@ -37,16 +37,16 @@ public final class Message {
         getTargetBytes();
 
     /**
-     * <code>string thenUser = 5;</code>
-     * @return The thenUser.
+     * <code>string token = 5;</code>
+     * @return The token.
      */
-    java.lang.String getThenUser();
+    java.lang.String getToken();
     /**
-     * <code>string thenUser = 5;</code>
-     * @return The bytes for thenUser.
+     * <code>string token = 5;</code>
+     * @return The bytes for token.
      */
     com.google.protobuf.ByteString
-        getThenUserBytes();
+        getTokenBytes();
 
     /**
      * <code>string time = 2;</code>
@@ -61,21 +61,10 @@ public final class Message {
         getTimeBytes();
 
     /**
-     * <code>repeated bytes Body = 3;</code>
-     * @return A list containing the body.
+     * <code>bytes Body = 3;</code>
+     * @return The body.
      */
-    java.util.List<com.google.protobuf.ByteString> getBodyList();
-    /**
-     * <code>repeated bytes Body = 3;</code>
-     * @return The count of body.
-     */
-    int getBodyCount();
-    /**
-     * <code>repeated bytes Body = 3;</code>
-     * @param index The index of the element to return.
-     * @return The body at the given index.
-     */
-    com.google.protobuf.ByteString getBody(int index);
+    com.google.protobuf.ByteString getBody();
   }
   /**
    * Protobuf type {@code MegBody}
@@ -91,9 +80,9 @@ public final class Message {
     }
     private MegBody() {
       target_ = "";
-      thenUser_ = "";
+      token_ = "";
       time_ = "";
-      body_ = java.util.Collections.emptyList();
+      body_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -116,7 +105,6 @@ public final class Message {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
-      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -139,11 +127,8 @@ public final class Message {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                body_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              body_.add(input.readBytes());
+
+              body_ = input.readBytes();
               break;
             }
             case 34: {
@@ -155,7 +140,7 @@ public final class Message {
             case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              thenUser_ = s;
+              token_ = s;
               break;
             }
             default: {
@@ -173,9 +158,6 @@ public final class Message {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          body_ = java.util.Collections.unmodifiableList(body_); // C
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -239,36 +221,36 @@ public final class Message {
       }
     }
 
-    public static final int THENUSER_FIELD_NUMBER = 5;
-    private volatile java.lang.Object thenUser_;
+    public static final int TOKEN_FIELD_NUMBER = 5;
+    private volatile java.lang.Object token_;
     /**
-     * <code>string thenUser = 5;</code>
-     * @return The thenUser.
+     * <code>string token = 5;</code>
+     * @return The token.
      */
-    public java.lang.String getThenUser() {
-      java.lang.Object ref = thenUser_;
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        thenUser_ = s;
+        token_ = s;
         return s;
       }
     }
     /**
-     * <code>string thenUser = 5;</code>
-     * @return The bytes for thenUser.
+     * <code>string token = 5;</code>
+     * @return The bytes for token.
      */
     public com.google.protobuf.ByteString
-        getThenUserBytes() {
-      java.lang.Object ref = thenUser_;
+        getTokenBytes() {
+      java.lang.Object ref = token_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        thenUser_ = b;
+        token_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -312,29 +294,13 @@ public final class Message {
     }
 
     public static final int BODY_FIELD_NUMBER = 3;
-    private java.util.List<com.google.protobuf.ByteString> body_;
+    private com.google.protobuf.ByteString body_;
     /**
-     * <code>repeated bytes Body = 3;</code>
-     * @return A list containing the body.
+     * <code>bytes Body = 3;</code>
+     * @return The body.
      */
-    public java.util.List<com.google.protobuf.ByteString>
-        getBodyList() {
+    public com.google.protobuf.ByteString getBody() {
       return body_;
-    }
-    /**
-     * <code>repeated bytes Body = 3;</code>
-     * @return The count of body.
-     */
-    public int getBodyCount() {
-      return body_.size();
-    }
-    /**
-     * <code>repeated bytes Body = 3;</code>
-     * @param index The index of the element to return.
-     * @return The body at the given index.
-     */
-    public com.google.protobuf.ByteString getBody(int index) {
-      return body_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -357,14 +323,14 @@ public final class Message {
       if (!getTimeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, time_);
       }
-      for (int i = 0; i < body_.size(); i++) {
-        output.writeBytes(3, body_.get(i));
+      if (!body_.isEmpty()) {
+        output.writeBytes(3, body_);
       }
       if (!getTargetBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, target_);
       }
-      if (!getThenUserBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, thenUser_);
+      if (!getTokenBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, token_);
       }
       unknownFields.writeTo(output);
     }
@@ -382,20 +348,15 @@ public final class Message {
       if (!getTimeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, time_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < body_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(body_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBodyList().size();
+      if (!body_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, body_);
       }
       if (!getTargetBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, target_);
       }
-      if (!getThenUserBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, thenUser_);
+      if (!getTokenBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, token_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -416,12 +377,12 @@ public final class Message {
           != other.getMegType()) return false;
       if (!getTarget()
           .equals(other.getTarget())) return false;
-      if (!getThenUser()
-          .equals(other.getThenUser())) return false;
+      if (!getToken()
+          .equals(other.getToken())) return false;
       if (!getTime()
           .equals(other.getTime())) return false;
-      if (!getBodyList()
-          .equals(other.getBodyList())) return false;
+      if (!getBody()
+          .equals(other.getBody())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -437,14 +398,12 @@ public final class Message {
       hash = (53 * hash) + getMegType();
       hash = (37 * hash) + TARGET_FIELD_NUMBER;
       hash = (53 * hash) + getTarget().hashCode();
-      hash = (37 * hash) + THENUSER_FIELD_NUMBER;
-      hash = (53 * hash) + getThenUser().hashCode();
+      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
+      hash = (53 * hash) + getToken().hashCode();
       hash = (37 * hash) + TIME_FIELD_NUMBER;
       hash = (53 * hash) + getTime().hashCode();
-      if (getBodyCount() > 0) {
-        hash = (37 * hash) + BODY_FIELD_NUMBER;
-        hash = (53 * hash) + getBodyList().hashCode();
-      }
+      hash = (37 * hash) + BODY_FIELD_NUMBER;
+      hash = (53 * hash) + getBody().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -582,12 +541,12 @@ public final class Message {
 
         target_ = "";
 
-        thenUser_ = "";
+        token_ = "";
 
         time_ = "";
 
-        body_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        body_ = com.google.protobuf.ByteString.EMPTY;
+
         return this;
       }
 
@@ -614,15 +573,10 @@ public final class Message {
       @java.lang.Override
       public com.HyChat.server.Handle.protoc.Message.MegBody buildPartial() {
         com.HyChat.server.Handle.protoc.Message.MegBody result = new com.HyChat.server.Handle.protoc.Message.MegBody(this);
-        int from_bitField0_ = bitField0_;
         result.megType_ = megType_;
         result.target_ = target_;
-        result.thenUser_ = thenUser_;
+        result.token_ = token_;
         result.time_ = time_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          body_ = java.util.Collections.unmodifiableList(body_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
         result.body_ = body_;
         onBuilt();
         return result;
@@ -679,23 +633,16 @@ public final class Message {
           target_ = other.target_;
           onChanged();
         }
-        if (!other.getThenUser().isEmpty()) {
-          thenUser_ = other.thenUser_;
+        if (!other.getToken().isEmpty()) {
+          token_ = other.token_;
           onChanged();
         }
         if (!other.getTime().isEmpty()) {
           time_ = other.time_;
           onChanged();
         }
-        if (!other.body_.isEmpty()) {
-          if (body_.isEmpty()) {
-            body_ = other.body_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureBodyIsMutable();
-            body_.addAll(other.body_);
-          }
-          onChanged();
+        if (other.getBody() != com.google.protobuf.ByteString.EMPTY) {
+          setBody(other.getBody());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -725,7 +672,6 @@ public final class Message {
         }
         return this;
       }
-      private int bitField0_;
 
       private int megType_ ;
       /**
@@ -833,78 +779,78 @@ public final class Message {
         return this;
       }
 
-      private java.lang.Object thenUser_ = "";
+      private java.lang.Object token_ = "";
       /**
-       * <code>string thenUser = 5;</code>
-       * @return The thenUser.
+       * <code>string token = 5;</code>
+       * @return The token.
        */
-      public java.lang.String getThenUser() {
-        java.lang.Object ref = thenUser_;
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          thenUser_ = s;
+          token_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string thenUser = 5;</code>
-       * @return The bytes for thenUser.
+       * <code>string token = 5;</code>
+       * @return The bytes for token.
        */
       public com.google.protobuf.ByteString
-          getThenUserBytes() {
-        java.lang.Object ref = thenUser_;
+          getTokenBytes() {
+        java.lang.Object ref = token_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          thenUser_ = b;
+          token_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string thenUser = 5;</code>
-       * @param value The thenUser to set.
+       * <code>string token = 5;</code>
+       * @param value The token to set.
        * @return This builder for chaining.
        */
-      public Builder setThenUser(
+      public Builder setToken(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        thenUser_ = value;
+        token_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string thenUser = 5;</code>
+       * <code>string token = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder clearThenUser() {
+      public Builder clearToken() {
         
-        thenUser_ = getDefaultInstance().getThenUser();
+        token_ = getDefaultInstance().getToken();
         onChanged();
         return this;
       }
       /**
-       * <code>string thenUser = 5;</code>
-       * @param value The bytes for thenUser to set.
+       * <code>string token = 5;</code>
+       * @param value The bytes for token to set.
        * @return This builder for chaining.
        */
-      public Builder setThenUserBytes(
+      public Builder setTokenBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        thenUser_ = value;
+        token_ = value;
         onChanged();
         return this;
       }
@@ -985,87 +931,35 @@ public final class Message {
         return this;
       }
 
-      private java.util.List<com.google.protobuf.ByteString> body_ = java.util.Collections.emptyList();
-      private void ensureBodyIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          body_ = new java.util.ArrayList<com.google.protobuf.ByteString>(body_);
-          bitField0_ |= 0x00000001;
-         }
-      }
+      private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>repeated bytes Body = 3;</code>
-       * @return A list containing the body.
+       * <code>bytes Body = 3;</code>
+       * @return The body.
        */
-      public java.util.List<com.google.protobuf.ByteString>
-          getBodyList() {
-        return ((bitField0_ & 0x00000001) != 0) ?
-                 java.util.Collections.unmodifiableList(body_) : body_;
+      public com.google.protobuf.ByteString getBody() {
+        return body_;
       }
       /**
-       * <code>repeated bytes Body = 3;</code>
-       * @return The count of body.
-       */
-      public int getBodyCount() {
-        return body_.size();
-      }
-      /**
-       * <code>repeated bytes Body = 3;</code>
-       * @param index The index of the element to return.
-       * @return The body at the given index.
-       */
-      public com.google.protobuf.ByteString getBody(int index) {
-        return body_.get(index);
-      }
-      /**
-       * <code>repeated bytes Body = 3;</code>
-       * @param index The index to set the value at.
+       * <code>bytes Body = 3;</code>
        * @param value The body to set.
        * @return This builder for chaining.
        */
-      public Builder setBody(
-          int index, com.google.protobuf.ByteString value) {
+      public Builder setBody(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureBodyIsMutable();
-        body_.set(index, value);
+  
+        body_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated bytes Body = 3;</code>
-       * @param value The body to add.
-       * @return This builder for chaining.
-       */
-      public Builder addBody(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureBodyIsMutable();
-        body_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated bytes Body = 3;</code>
-       * @param values The body to add.
-       * @return This builder for chaining.
-       */
-      public Builder addAllBody(
-          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
-        ensureBodyIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, body_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated bytes Body = 3;</code>
+       * <code>bytes Body = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearBody() {
-        body_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        
+        body_ = getDefaultInstance().getBody();
         onChanged();
         return this;
       }
@@ -1136,10 +1030,10 @@ public final class Message {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rMessage.proto\"X\n\007MegBody\022\017\n\007MegType\030\001 " +
-      "\001(\005\022\016\n\006Target\030\004 \001(\t\022\020\n\010thenUser\030\005 \001(\t\022\014\n" +
-      "\004time\030\002 \001(\t\022\014\n\004Body\030\003 \003(\014B!\n\037com.HyChat." +
-      "server.Handle.protocb\006proto3"
+      "\n\rMessage.proto\"U\n\007MegBody\022\017\n\007MegType\030\001 " +
+      "\001(\005\022\016\n\006Target\030\004 \001(\t\022\r\n\005token\030\005 \001(\t\022\014\n\004ti" +
+      "me\030\002 \001(\t\022\014\n\004Body\030\003 \001(\014B!\n\037com.HyChat.ser" +
+      "ver.Handle.protocb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1150,7 +1044,7 @@ public final class Message {
     internal_static_MegBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MegBody_descriptor,
-        new java.lang.String[] { "MegType", "Target", "ThenUser", "Time", "Body", });
+        new java.lang.String[] { "MegType", "Target", "Token", "Time", "Body", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
