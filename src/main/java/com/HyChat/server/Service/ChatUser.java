@@ -1,6 +1,7 @@
 package com.HyChat.server.User;
 
 import com.HyChat.server.Entity.User;
+import com.HyChat.server.untity.JwtUntity;
 
 import javax.jws.soap.SOAPBinding;
 import java.nio.channels.SocketChannel;
@@ -25,14 +26,14 @@ public class ChatUser {
      * 用户登录返回鉴权
      * @return
      */
-    public User Login(String admin, String Password){
+    public String Login(String admin, String Password){
         if (chatUserMap.containsKey(admin)){
             User user=chatUserMap.get(admin);
             if (user.getAdmin().equals(admin)&&user.getPassword().equals(Password)){
-                return user;
+                return JwtUntity.EncoderJwt(user);
             }
         }
-        return null;
+        return "账户或者密码错误";
 
     }
 }
