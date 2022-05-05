@@ -25,6 +25,30 @@ public final class Message {
     int getMegType();
 
     /**
+     * <code>string Target = 4;</code>
+     * @return The target.
+     */
+    java.lang.String getTarget();
+    /**
+     * <code>string Target = 4;</code>
+     * @return The bytes for target.
+     */
+    com.google.protobuf.ByteString
+        getTargetBytes();
+
+    /**
+     * <code>string thenUser = 5;</code>
+     * @return The thenUser.
+     */
+    java.lang.String getThenUser();
+    /**
+     * <code>string thenUser = 5;</code>
+     * @return The bytes for thenUser.
+     */
+    com.google.protobuf.ByteString
+        getThenUserBytes();
+
+    /**
      * <code>string time = 2;</code>
      * @return The time.
      */
@@ -66,6 +90,8 @@ public final class Message {
       super(builder);
     }
     private MegBody() {
+      target_ = "";
+      thenUser_ = "";
       time_ = "";
       body_ = java.util.Collections.emptyList();
     }
@@ -120,6 +146,18 @@ public final class Message {
               body_.add(input.readBytes());
               break;
             }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              target_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              thenUser_ = s;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -163,6 +201,78 @@ public final class Message {
      */
     public int getMegType() {
       return megType_;
+    }
+
+    public static final int TARGET_FIELD_NUMBER = 4;
+    private volatile java.lang.Object target_;
+    /**
+     * <code>string Target = 4;</code>
+     * @return The target.
+     */
+    public java.lang.String getTarget() {
+      java.lang.Object ref = target_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        target_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string Target = 4;</code>
+     * @return The bytes for target.
+     */
+    public com.google.protobuf.ByteString
+        getTargetBytes() {
+      java.lang.Object ref = target_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        target_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int THENUSER_FIELD_NUMBER = 5;
+    private volatile java.lang.Object thenUser_;
+    /**
+     * <code>string thenUser = 5;</code>
+     * @return The thenUser.
+     */
+    public java.lang.String getThenUser() {
+      java.lang.Object ref = thenUser_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        thenUser_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string thenUser = 5;</code>
+     * @return The bytes for thenUser.
+     */
+    public com.google.protobuf.ByteString
+        getThenUserBytes() {
+      java.lang.Object ref = thenUser_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        thenUser_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int TIME_FIELD_NUMBER = 2;
@@ -250,6 +360,12 @@ public final class Message {
       for (int i = 0; i < body_.size(); i++) {
         output.writeBytes(3, body_.get(i));
       }
+      if (!getTargetBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, target_);
+      }
+      if (!getThenUserBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, thenUser_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -275,6 +391,12 @@ public final class Message {
         size += dataSize;
         size += 1 * getBodyList().size();
       }
+      if (!getTargetBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, target_);
+      }
+      if (!getThenUserBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, thenUser_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -292,6 +414,10 @@ public final class Message {
 
       if (getMegType()
           != other.getMegType()) return false;
+      if (!getTarget()
+          .equals(other.getTarget())) return false;
+      if (!getThenUser()
+          .equals(other.getThenUser())) return false;
       if (!getTime()
           .equals(other.getTime())) return false;
       if (!getBodyList()
@@ -309,6 +435,10 @@ public final class Message {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MEGTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getMegType();
+      hash = (37 * hash) + TARGET_FIELD_NUMBER;
+      hash = (53 * hash) + getTarget().hashCode();
+      hash = (37 * hash) + THENUSER_FIELD_NUMBER;
+      hash = (53 * hash) + getThenUser().hashCode();
       hash = (37 * hash) + TIME_FIELD_NUMBER;
       hash = (53 * hash) + getTime().hashCode();
       if (getBodyCount() > 0) {
@@ -450,6 +580,10 @@ public final class Message {
         super.clear();
         megType_ = 0;
 
+        target_ = "";
+
+        thenUser_ = "";
+
         time_ = "";
 
         body_ = java.util.Collections.emptyList();
@@ -482,6 +616,8 @@ public final class Message {
         com.HyChat.server.Handle.protoc.Message.MegBody result = new com.HyChat.server.Handle.protoc.Message.MegBody(this);
         int from_bitField0_ = bitField0_;
         result.megType_ = megType_;
+        result.target_ = target_;
+        result.thenUser_ = thenUser_;
         result.time_ = time_;
         if (((bitField0_ & 0x00000001) != 0)) {
           body_ = java.util.Collections.unmodifiableList(body_);
@@ -538,6 +674,14 @@ public final class Message {
         if (other == com.HyChat.server.Handle.protoc.Message.MegBody.getDefaultInstance()) return this;
         if (other.getMegType() != 0) {
           setMegType(other.getMegType());
+        }
+        if (!other.getTarget().isEmpty()) {
+          target_ = other.target_;
+          onChanged();
+        }
+        if (!other.getThenUser().isEmpty()) {
+          thenUser_ = other.thenUser_;
+          onChanged();
         }
         if (!other.getTime().isEmpty()) {
           time_ = other.time_;
@@ -609,6 +753,158 @@ public final class Message {
       public Builder clearMegType() {
         
         megType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object target_ = "";
+      /**
+       * <code>string Target = 4;</code>
+       * @return The target.
+       */
+      public java.lang.String getTarget() {
+        java.lang.Object ref = target_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          target_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string Target = 4;</code>
+       * @return The bytes for target.
+       */
+      public com.google.protobuf.ByteString
+          getTargetBytes() {
+        java.lang.Object ref = target_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          target_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string Target = 4;</code>
+       * @param value The target to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTarget(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        target_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string Target = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTarget() {
+        
+        target_ = getDefaultInstance().getTarget();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string Target = 4;</code>
+       * @param value The bytes for target to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTargetBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        target_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object thenUser_ = "";
+      /**
+       * <code>string thenUser = 5;</code>
+       * @return The thenUser.
+       */
+      public java.lang.String getThenUser() {
+        java.lang.Object ref = thenUser_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          thenUser_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string thenUser = 5;</code>
+       * @return The bytes for thenUser.
+       */
+      public com.google.protobuf.ByteString
+          getThenUserBytes() {
+        java.lang.Object ref = thenUser_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          thenUser_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string thenUser = 5;</code>
+       * @param value The thenUser to set.
+       * @return This builder for chaining.
+       */
+      public Builder setThenUser(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        thenUser_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string thenUser = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearThenUser() {
+        
+        thenUser_ = getDefaultInstance().getThenUser();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string thenUser = 5;</code>
+       * @param value The bytes for thenUser to set.
+       * @return This builder for chaining.
+       */
+      public Builder setThenUserBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        thenUser_ = value;
         onChanged();
         return this;
       }
@@ -840,9 +1136,10 @@ public final class Message {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rMessage.proto\"6\n\007MegBody\022\017\n\007MegType\030\001 " +
-      "\001(\005\022\014\n\004time\030\002 \001(\t\022\014\n\004Body\030\003 \003(\014B!\n\037com.H" +
-      "yChat.server.Handle.protocb\006proto3"
+      "\n\rMessage.proto\"X\n\007MegBody\022\017\n\007MegType\030\001 " +
+      "\001(\005\022\016\n\006Target\030\004 \001(\t\022\020\n\010thenUser\030\005 \001(\t\022\014\n" +
+      "\004time\030\002 \001(\t\022\014\n\004Body\030\003 \003(\014B!\n\037com.HyChat." +
+      "server.Handle.protocb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -853,7 +1150,7 @@ public final class Message {
     internal_static_MegBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MegBody_descriptor,
-        new java.lang.String[] { "MegType", "Time", "Body", });
+        new java.lang.String[] { "MegType", "Target", "ThenUser", "Time", "Body", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

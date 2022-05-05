@@ -4,7 +4,8 @@ option java_package = "com.HyChat.server.Handle.protoc";
 
 message MegBody {
     int32 MegType=1;
-
+    string Target =4;
+    string thenUser=5;
     string time=2;
     repeated bytes Body=3;
 }
