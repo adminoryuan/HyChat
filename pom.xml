@@ -14,6 +14,14 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        <!--lombok依赖，自动生成实体类中的get set 构造方法-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>1.18.22</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
