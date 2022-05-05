@@ -57,17 +57,20 @@ public class HyChatServer {
                         socketChannel= (ServerSocketChannel) currKey.channel();
                         SocketChannel channel = socketChannel.accept();
                         channel.configureBlocking(false);
+                        channel.write(ByteBuffer.wrap(new String("Hello Client.").getBytes()));
+
                         //注册读事件
                         channel.register(selector, SelectionKey.OP_READ);
 
                         System.out.println("收到链接");
-                    }else {
+                    }else if (currKey.isReadable()){
                         SocketChannel channel = (SocketChannel) currKey.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
 
                         int length = channel.read(buffer);
+                        String msg = "server receive msg:" + new String(buffer.array(), 0, length);
+                        System.out.println(msg);
 
-                        System.out.println(new String(buffer.array()));
                     }
                 }
             }
