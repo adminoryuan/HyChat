@@ -1,3 +1,5 @@
+import com.HyChat.server.Handle.Message.ResultMessageOuterClass;
+import com.HyChat.server.Handle.Message.UserMessageOuterClass;
 import com.google.protobuf.ByteString;
 import lombok.SneakyThrows;
 import org.junit.Test;
@@ -5,7 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-
+import java.util.Arrays;
 
 
 public class TestServer {
@@ -39,6 +41,29 @@ public class TestServer {
             break;
         }
         while (true);
+    }
+    @Test
+    public void LoginTEST() throws IOException {
+
+        Socket socket=new Socket();
+        socket.connect(new InetSocketAddress("127.0.0.1",8888));
+
+        Message.MegBody.Builder mBody= Message.MegBody.newBuilder();
+        mBody.setMegType(1);
+        UserMessageOuterClass.UserMessage.Builder userMessage=UserMessageOuterClass.UserMessage.newBuilder();
+        userMessage.setAdmin("admin");
+        userMessage.setPassWord("passwod");
+        mBody.setBody(ByteString.copyFrom(userMessage.build().toByteArray()));
+
+
+        socket.getOutputStream().write(mBody.build().toByteArray());
+        byte[] bodys=new byte[1024];
+        int len= socket.getInputStream().read(bodys);
+
+        ResultMessageOuterClass.ResultMessage resultMessage = ResultMessageOuterClass.ResultMessage.parseFrom(Arrays.copyOfRange(bodys, 0, len));
+
+        System.out.println(resultMessage.getData());
+
     }
 
 }

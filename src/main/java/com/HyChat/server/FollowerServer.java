@@ -64,6 +64,7 @@ public class FollowerServer {
                         SocketChannel channel = (SocketChannel) currKey.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         int length = channel.read(buffer);
+                        if (length>0)
                         try {
                             factory.execute(new Runnable() {
                                 @SneakyThrows
