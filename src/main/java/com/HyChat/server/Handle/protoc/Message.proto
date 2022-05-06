@@ -4,7 +4,7 @@ option java_package = "com.HyChat.server.Handle";
 
 message MegBody {
     int32 MegType=1;
-    int32 IsMass=6; //是否群发
+    bool IsMass=6; //是否群发
     string Target =4;//目标用户
     string token=5;
     string time=2; //发送时间
