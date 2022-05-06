@@ -1,0 +1,12 @@
+syntax = "proto3";
+message user {
+    string admin=1;
+    bool sex=2;
+    int32 age=3;
+    string name=4;
+
+}
+//当前所有在线用户
+message  OnlineUserMeg {
+    repeated user OnlineProson=1;
+}
