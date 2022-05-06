@@ -2,28 +2,21 @@ package com.HyChat.server;
 
 import com.HyChat.server.Handle.MegHandel;
 import com.HyChat.server.Handle.MegHandelimpl;
-import com.HyChat.server.Handle.Message.Message;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 启动类 基于rector模型
  */
 public class HyChatServer {
-    public static BlockingDeque<SelectionKey> keyBlockingDeque=new LinkedBlockingDeque<>();
 
     private Selector selector;
 

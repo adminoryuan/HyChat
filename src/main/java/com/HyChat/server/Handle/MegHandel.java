@@ -1,7 +1,12 @@
 package com.HyChat.server.Handle;
 
 import com.HyChat.server.Handle.Message.Message;
+import com.HyChat.server.untity.Messageuntity;
+import com.HyChat.server.untity.VerifUntity;
+import com.google.protobuf.ByteString;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Map;
@@ -15,6 +20,7 @@ public  abstract class MegHandel{
      * 保存在线用户
      */
     protected static Map<String,SelectionKey> OnlineUser=new ConcurrentHashMap<>();
+    private VerifUntity untity=new VerifUntity();
     /**
      * 定义处理消息
      * BodyType
@@ -25,12 +31,21 @@ public  abstract class MegHandel{
      */
     public void DoHandel(Message.MegBody body, SelectionKey _ch){
 
-        System.out.println("处理消息");
-        System.out.println(body.getMegType());
+
+        if (body.getMegType()==1){
+            LoginHandle(body,_ch);
+            return;
+        }
+        String admin=untity.VerifToken(body.getToken());
+        if (admin==null){
+            try {
+                WriteMessage(_ch,Messageuntity.Unauthorized().build().toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
         switch (body.getMegType()){
-            case 1:
-                LoginHandle(body,_ch);
-                break;
             case 2:
                 TexHandle(body);
                 break;
@@ -40,6 +55,16 @@ public  abstract class MegHandel{
         }
     }
 
+    /**
+     * 发送响应到客户端
+     * @param CurrKey
+     * @param body
+     * @throws IOException
+     */
+    protected static void WriteMessage(SelectionKey CurrKey, byte[] body) throws IOException {
+        SocketChannel socketChannel = (SocketChannel) CurrKey.channel();
+        socketChannel.write(ByteBuffer.wrap(body));
+    }
     /**
      * 处理文本消息
      * @param body
@@ -58,4 +83,6 @@ public  abstract class MegHandel{
      * @param body
      */
     abstract void BinaryHandle(Message.MegBody body);
+
+
 }

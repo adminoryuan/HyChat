@@ -38,9 +38,15 @@ public class JwtUntity {
      */
     public static String DecodingJwt(String jwt){
         JwtParser jwtParser=Jwts.parser();
-        jwtParser.setSigningKey(PrivateKey);
-        Jws<Claims> headerClaimsJwt = jwtParser.parseClaimsJws(jwt);
 
-        return headerClaimsJwt.getBody().get("admin").toString();
+        jwtParser.setSigningKey(PrivateKey);
+        try {
+
+            Jws<Claims> headerClaimsJwt = jwtParser.parseClaimsJws(jwt);
+            return headerClaimsJwt.getBody().get("admin").toString();
+
+        }catch (Exception e){
+            return null;
+        }
     }
 }

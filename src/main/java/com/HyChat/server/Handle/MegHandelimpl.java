@@ -4,11 +4,11 @@ import com.HyChat.server.Handle.Message.Message;
 import com.HyChat.server.Handle.Message.ResultMessageOuterClass;
 import com.HyChat.server.Handle.Message.UserMessageOuterClass;
 import com.HyChat.server.Service.ChatUserService;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
@@ -20,23 +20,37 @@ public class MegHandelimpl extends MegHandel{
          * @param bodys
          * @throws IOException
          */
-        void  Mass(ByteBuffer bodys) throws IOException {
+        void  Mass (byte[] bodys) throws IOException {
+            System.out.println("群发消息");
+            System.out.println(OnlineUser.values().size());
             for (SelectionKey key : OnlineUser.values()) {
-                SocketChannel socketChannel = (SocketChannel) key.channel();
-                socketChannel.write(bodys);
+                WriteMessage(key,"jell".getBytes());
             }
         }
     }
 
     @Override
     void TexHandle(Message.MegBody body) {
-
+        if (body.getIsMass()){
+            try {
+                //群发消息
+                new MessageForard().Mass(body.toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
         byte[] meg= body.getBody().toByteArray();
 
         System.out.println(new String(meg));
 
     }
 
+    /**
+     * 登录消息
+     * @param body
+     * @param channel
+     */
     @Override
     void LoginHandle(Message.MegBody body, SelectionKey channel) {
         try {

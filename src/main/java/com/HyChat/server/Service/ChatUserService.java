@@ -27,6 +27,8 @@ public class ChatUserService {
     static {
         chatUserMap=new ConcurrentHashMap<>();
         chatUserMap.put("admin",new User("admin","passwod","张三",true));
+
+        chatUserMap.put("admin1",new User("admin1","passwod","李四",true));
         OnLineMap=new HashMap<>();
     }
 
