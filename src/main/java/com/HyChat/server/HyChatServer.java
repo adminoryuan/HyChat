@@ -1,6 +1,10 @@
 package com.HyChat.server;
 
-import javax.swing.text.html.HTMLDocument;
+import com.HyChat.server.Handle.MegHandel;
+import com.HyChat.server.Handle.MegHandelimpl;
+import com.HyChat.server.Handle.Message.Message;
+import lombok.SneakyThrows;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -8,17 +12,32 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.logging.Logger;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- * 启动类
+ * 启动类 基于rector模型
  */
 public class HyChatServer {
+    public static BlockingDeque<SelectionKey> keyBlockingDeque=new LinkedBlockingDeque<>();
 
     private Selector selector;
+
+    private final int MaxFollwer=3;
+
     private ServerSocketChannel socketChannel;
+
+    private MegHandel megHandel;
+
     private int keys=0;
+
+    private FollowerServer[] followerServer=new FollowerServer[MaxFollwer];
+
+    private ExecutorService factory= Executors.newFixedThreadPool(3);
     /**
      * 启动server
      */
@@ -34,10 +53,17 @@ public class HyChatServer {
     private void init() throws IOException {
        socketChannel= ServerSocketChannel.open();
        selector=Selector.open();
+       //设置为非阻塞
        socketChannel.configureBlocking(false);
        socketChannel.socket().bind(new InetSocketAddress("127.0.0.1",8888));
-       socketChannel.register(selector, SelectionKey.OP_ACCEPT);//链接时触发
 
+       socketChannel.register(selector, SelectionKey.OP_ACCEPT);//注册链接事件
+
+        megHandel=new MegHandelimpl();
+        //初始化子rector
+        for (int i=0;i<MaxFollwer;i++){
+            followerServer[i]=new FollowerServer();
+        }
     }
 
     /**
@@ -45,32 +71,30 @@ public class HyChatServer {
      */
     private void HandelConn() throws IOException {
         System.out.println("链接启动");
+        int index=0;
         while (true) {
             keys = selector.select();//会阻塞直到有链接请求进来
             if (keys>0){
                 Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                 while(iterator.hasNext()){
                     SelectionKey currKey=iterator.next();
+
                     iterator.remove();
 
                     if (currKey.isAcceptable()){
+
                         socketChannel= (ServerSocketChannel) currKey.channel();
+
                         SocketChannel channel = socketChannel.accept();
+
                         channel.configureBlocking(false);
-                        channel.write(ByteBuffer.wrap(new String("Hello Client.").getBytes()));
 
                         //注册读事件
-                        channel.register(selector, SelectionKey.OP_READ);
+
+                        followerServer[0].Regist(channel);
+
 
                         System.out.println("收到链接");
-                    }else if (currKey.isReadable()){
-                        SocketChannel channel = (SocketChannel) currKey.channel();
-                        ByteBuffer buffer = ByteBuffer.allocate(1024);
-
-                        int length = channel.read(buffer);
-                        String msg = "server receive msg:" + new String(buffer.array(), 0, length);
-                        System.out.println(msg);
-
                     }
                 }
             }

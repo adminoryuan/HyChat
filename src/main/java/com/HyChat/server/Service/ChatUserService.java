@@ -3,21 +3,31 @@ package com.HyChat.server.Service;
 import com.HyChat.server.Entity.User;
 import com.HyChat.server.untity.JwtUntity;
 
+import java.nio.channels.SelectionKey;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 模拟一个用户的登录注册等。。
  */
-public class ChatUser {
+public class ChatUserService {
+
+    /**
+     * 保存当前在线用户
+     */
+    public static Map<String, SelectionKey> OnLineMap;
+
     /**
      * 模拟数据库 存储用户 为了快速命中用户
      */
+
     private static Map<String,User> chatUserMap;
 
     static {
         chatUserMap=new ConcurrentHashMap<>();
         chatUserMap.put("admin",new User());
+        OnLineMap=new HashMap<>();
     }
 
     /**

@@ -13,6 +13,12 @@ import java.util.Map;
 public class JwtUntity {
 
     public static String PrivateKey="jaslkdjalksjdlaksjdlkasjdlkajsldkjas";
+
+    /**
+     * 生成jwt
+     * @param user
+     * @return
+     */
     public static String EncoderJwt(User user){
         JwtBuilder Jwtbuilder = Jwts.builder();
         Map<String,Object> hashMap=new HashMap<>();
@@ -24,6 +30,12 @@ public class JwtUntity {
                 .setExpiration(new Date(System.currentTimeMillis()+5000))
                 .signWith(SignatureAlgorithm.HS256,PrivateKey).compact();
     }
+
+    /**
+     * 从jwt中解析出用户名
+     * @param jwt
+     * @return
+     */
     public static String DecodingJwt(String jwt){
         JwtParser jwtParser=Jwts.parser();
         jwtParser.setSigningKey(PrivateKey);
