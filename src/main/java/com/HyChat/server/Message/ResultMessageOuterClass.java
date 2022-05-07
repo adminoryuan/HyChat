@@ -25,18 +25,41 @@ public final class ResultMessageOuterClass {
     boolean getResult();
 
     /**
-     * <code>string Data = 2;</code>
+     * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+     * @return Whether the sendTime field is set.
+     */
+    boolean hasSendTime();
+    /**
+     * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+     * @return The sendTime.
+     */
+    com.google.protobuf.Timestamp getSendTime();
+    /**
+     * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getSendTimeOrBuilder();
+
+    /**
+     * <pre>
+     *消息类型
+     * </pre>
+     *
+     * <code>int32 MessType = 3;</code>
+     * @return The messType.
+     */
+    int getMessType();
+
+    /**
+     * <code>bytes Data = 2;</code>
      * @return The data.
      */
-    java.lang.String getData();
-    /**
-     * <code>string Data = 2;</code>
-     * @return The bytes for data.
-     */
-    com.google.protobuf.ByteString
-        getDataBytes();
+    com.google.protobuf.ByteString getData();
   }
   /**
+   * <pre>
+   * 服务端返回客户端的消息
+   * </pre>
+   *
    * Protobuf type {@code ResultMessage}
    */
   public  static final class ResultMessage extends
@@ -49,7 +72,7 @@ public final class ResultMessageOuterClass {
       super(builder);
     }
     private ResultMessage() {
-      data_ = "";
+      data_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -88,9 +111,26 @@ public final class ResultMessageOuterClass {
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              data_ = s;
+              data_ = input.readBytes();
+              break;
+            }
+            case 24: {
+
+              messType_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.Timestamp.Builder subBuilder = null;
+              if (sendTime_ != null) {
+                subBuilder = sendTime_.toBuilder();
+              }
+              sendTime_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sendTime_);
+                sendTime_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -114,15 +154,15 @@ public final class ResultMessageOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return ResultMessageOuterClass.internal_static_ResultMessage_descriptor;
+      return com.HyChat.server.Message.ResultMessageOuterClass.internal_static_ResultMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return ResultMessageOuterClass.internal_static_ResultMessage_fieldAccessorTable
+      return com.HyChat.server.Message.ResultMessageOuterClass.internal_static_ResultMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ResultMessageOuterClass.ResultMessage.class, ResultMessageOuterClass.ResultMessage.Builder.class);
+              com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.class, com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.Builder.class);
     }
 
     public static final int RESULT_FIELD_NUMBER = 1;
@@ -135,40 +175,51 @@ public final class ResultMessageOuterClass {
       return result_;
     }
 
-    public static final int DATA_FIELD_NUMBER = 2;
-    private volatile java.lang.Object data_;
+    public static final int SENDTIME_FIELD_NUMBER = 4;
+    private com.google.protobuf.Timestamp sendTime_;
     /**
-     * <code>string Data = 2;</code>
-     * @return The data.
+     * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+     * @return Whether the sendTime field is set.
      */
-    public java.lang.String getData() {
-      java.lang.Object ref = data_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        data_ = s;
-        return s;
-      }
+    public boolean hasSendTime() {
+      return sendTime_ != null;
     }
     /**
-     * <code>string Data = 2;</code>
-     * @return The bytes for data.
+     * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+     * @return The sendTime.
      */
-    public com.google.protobuf.ByteString
-        getDataBytes() {
-      java.lang.Object ref = data_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        data_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.Timestamp getSendTime() {
+      return sendTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : sendTime_;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getSendTimeOrBuilder() {
+      return getSendTime();
+    }
+
+    public static final int MESSTYPE_FIELD_NUMBER = 3;
+    private int messType_;
+    /**
+     * <pre>
+     *消息类型
+     * </pre>
+     *
+     * <code>int32 MessType = 3;</code>
+     * @return The messType.
+     */
+    public int getMessType() {
+      return messType_;
+    }
+
+    public static final int DATA_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString data_;
+    /**
+     * <code>bytes Data = 2;</code>
+     * @return The data.
+     */
+    public com.google.protobuf.ByteString getData() {
+      return data_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -188,8 +239,14 @@ public final class ResultMessageOuterClass {
       if (result_ != false) {
         output.writeBool(1, result_);
       }
-      if (!getDataBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, data_);
+      if (!data_.isEmpty()) {
+        output.writeBytes(2, data_);
+      }
+      if (messType_ != 0) {
+        output.writeInt32(3, messType_);
+      }
+      if (sendTime_ != null) {
+        output.writeMessage(4, getSendTime());
       }
       unknownFields.writeTo(output);
     }
@@ -204,8 +261,17 @@ public final class ResultMessageOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(1, result_);
       }
-      if (!getDataBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, data_);
+      if (!data_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, data_);
+      }
+      if (messType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, messType_);
+      }
+      if (sendTime_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getSendTime());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -217,13 +283,20 @@ public final class ResultMessageOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof ResultMessageOuterClass.ResultMessage)) {
+      if (!(obj instanceof com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage)) {
         return super.equals(obj);
       }
-      ResultMessageOuterClass.ResultMessage other = (ResultMessageOuterClass.ResultMessage) obj;
+      com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage other = (com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage) obj;
 
       if (getResult()
           != other.getResult()) return false;
+      if (hasSendTime() != other.hasSendTime()) return false;
+      if (hasSendTime()) {
+        if (!getSendTime()
+            .equals(other.getSendTime())) return false;
+      }
+      if (getMessType()
+          != other.getMessType()) return false;
       if (!getData()
           .equals(other.getData())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -240,6 +313,12 @@ public final class ResultMessageOuterClass {
       hash = (37 * hash) + RESULT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getResult());
+      if (hasSendTime()) {
+        hash = (37 * hash) + SENDTIME_FIELD_NUMBER;
+        hash = (53 * hash) + getSendTime().hashCode();
+      }
+      hash = (37 * hash) + MESSTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessType();
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + getData().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -247,69 +326,69 @@ public final class ResultMessageOuterClass {
       return hash;
     }
 
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(byte[] data)
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(java.io.InputStream input)
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static ResultMessageOuterClass.ResultMessage parseDelimitedFrom(java.io.InputStream input)
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static ResultMessageOuterClass.ResultMessage parseDelimitedFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static ResultMessageOuterClass.ResultMessage parseFrom(
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -322,7 +401,7 @@ public final class ResultMessageOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(ResultMessageOuterClass.ResultMessage prototype) {
+    public static Builder newBuilder(com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -338,26 +417,30 @@ public final class ResultMessageOuterClass {
       return builder;
     }
     /**
+     * <pre>
+     * 服务端返回客户端的消息
+     * </pre>
+     *
      * Protobuf type {@code ResultMessage}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:ResultMessage)
-        ResultMessageOuterClass.ResultMessageOrBuilder {
+        com.HyChat.server.Message.ResultMessageOuterClass.ResultMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return ResultMessageOuterClass.internal_static_ResultMessage_descriptor;
+        return com.HyChat.server.Message.ResultMessageOuterClass.internal_static_ResultMessage_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return ResultMessageOuterClass.internal_static_ResultMessage_fieldAccessorTable
+        return com.HyChat.server.Message.ResultMessageOuterClass.internal_static_ResultMessage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                ResultMessageOuterClass.ResultMessage.class, ResultMessageOuterClass.ResultMessage.Builder.class);
+                com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.class, com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.Builder.class);
       }
 
-      // Construct using com.HyChat.server.Handle.ResultMessageOuterClass.ResultMessage.newBuilder()
+      // Construct using com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -377,7 +460,15 @@ public final class ResultMessageOuterClass {
         super.clear();
         result_ = false;
 
-        data_ = "";
+        if (sendTimeBuilder_ == null) {
+          sendTime_ = null;
+        } else {
+          sendTime_ = null;
+          sendTimeBuilder_ = null;
+        }
+        messType_ = 0;
+
+        data_ = com.google.protobuf.ByteString.EMPTY;
 
         return this;
       }
@@ -385,17 +476,17 @@ public final class ResultMessageOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return ResultMessageOuterClass.internal_static_ResultMessage_descriptor;
+        return com.HyChat.server.Message.ResultMessageOuterClass.internal_static_ResultMessage_descriptor;
       }
 
       @java.lang.Override
-      public ResultMessageOuterClass.ResultMessage getDefaultInstanceForType() {
-        return ResultMessageOuterClass.ResultMessage.getDefaultInstance();
+      public com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage getDefaultInstanceForType() {
+        return com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.getDefaultInstance();
       }
 
       @java.lang.Override
-      public ResultMessageOuterClass.ResultMessage build() {
-        ResultMessageOuterClass.ResultMessage result = buildPartial();
+      public com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage build() {
+        com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -403,9 +494,15 @@ public final class ResultMessageOuterClass {
       }
 
       @java.lang.Override
-      public ResultMessageOuterClass.ResultMessage buildPartial() {
-        ResultMessageOuterClass.ResultMessage result = new ResultMessageOuterClass.ResultMessage(this);
+      public com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage buildPartial() {
+        com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage result = new com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage(this);
         result.result_ = result_;
+        if (sendTimeBuilder_ == null) {
+          result.sendTime_ = sendTime_;
+        } else {
+          result.sendTime_ = sendTimeBuilder_.build();
+        }
+        result.messType_ = messType_;
         result.data_ = data_;
         onBuilt();
         return result;
@@ -445,22 +542,27 @@ public final class ResultMessageOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ResultMessageOuterClass.ResultMessage) {
-          return mergeFrom((ResultMessageOuterClass.ResultMessage)other);
+        if (other instanceof com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage) {
+          return mergeFrom((com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(ResultMessageOuterClass.ResultMessage other) {
-        if (other == ResultMessageOuterClass.ResultMessage.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage other) {
+        if (other == com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage.getDefaultInstance()) return this;
         if (other.getResult() != false) {
           setResult(other.getResult());
         }
-        if (!other.getData().isEmpty()) {
-          data_ = other.data_;
-          onChanged();
+        if (other.hasSendTime()) {
+          mergeSendTime(other.getSendTime());
+        }
+        if (other.getMessType() != 0) {
+          setMessType(other.getMessType());
+        }
+        if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
+          setData(other.getData());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -477,11 +579,11 @@ public final class ResultMessageOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        ResultMessageOuterClass.ResultMessage parsedMessage = null;
+        com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ResultMessageOuterClass.ResultMessage) e.getUnfinishedMessage();
+          parsedMessage = (com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -521,47 +623,181 @@ public final class ResultMessageOuterClass {
         return this;
       }
 
-      private java.lang.Object data_ = "";
+      private com.google.protobuf.Timestamp sendTime_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> sendTimeBuilder_;
       /**
-       * <code>string Data = 2;</code>
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       * @return Whether the sendTime field is set.
+       */
+      public boolean hasSendTime() {
+        return sendTimeBuilder_ != null || sendTime_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       * @return The sendTime.
+       */
+      public com.google.protobuf.Timestamp getSendTime() {
+        if (sendTimeBuilder_ == null) {
+          return sendTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : sendTime_;
+        } else {
+          return sendTimeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      public Builder setSendTime(com.google.protobuf.Timestamp value) {
+        if (sendTimeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sendTime_ = value;
+          onChanged();
+        } else {
+          sendTimeBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      public Builder setSendTime(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (sendTimeBuilder_ == null) {
+          sendTime_ = builderForValue.build();
+          onChanged();
+        } else {
+          sendTimeBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      public Builder mergeSendTime(com.google.protobuf.Timestamp value) {
+        if (sendTimeBuilder_ == null) {
+          if (sendTime_ != null) {
+            sendTime_ =
+              com.google.protobuf.Timestamp.newBuilder(sendTime_).mergeFrom(value).buildPartial();
+          } else {
+            sendTime_ = value;
+          }
+          onChanged();
+        } else {
+          sendTimeBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      public Builder clearSendTime() {
+        if (sendTimeBuilder_ == null) {
+          sendTime_ = null;
+          onChanged();
+        } else {
+          sendTime_ = null;
+          sendTimeBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getSendTimeBuilder() {
+        
+        onChanged();
+        return getSendTimeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getSendTimeOrBuilder() {
+        if (sendTimeBuilder_ != null) {
+          return sendTimeBuilder_.getMessageOrBuilder();
+        } else {
+          return sendTime_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : sendTime_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp sendTime = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getSendTimeFieldBuilder() {
+        if (sendTimeBuilder_ == null) {
+          sendTimeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getSendTime(),
+                  getParentForChildren(),
+                  isClean());
+          sendTime_ = null;
+        }
+        return sendTimeBuilder_;
+      }
+
+      private int messType_ ;
+      /**
+       * <pre>
+       *消息类型
+       * </pre>
+       *
+       * <code>int32 MessType = 3;</code>
+       * @return The messType.
+       */
+      public int getMessType() {
+        return messType_;
+      }
+      /**
+       * <pre>
+       *消息类型
+       * </pre>
+       *
+       * <code>int32 MessType = 3;</code>
+       * @param value The messType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessType(int value) {
+        
+        messType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *消息类型
+       * </pre>
+       *
+       * <code>int32 MessType = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessType() {
+        
+        messType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes Data = 2;</code>
        * @return The data.
        */
-      public java.lang.String getData() {
-        java.lang.Object ref = data_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          data_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getData() {
+        return data_;
       }
       /**
-       * <code>string Data = 2;</code>
-       * @return The bytes for data.
-       */
-      public com.google.protobuf.ByteString
-          getDataBytes() {
-        java.lang.Object ref = data_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          data_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string Data = 2;</code>
+       * <code>bytes Data = 2;</code>
        * @param value The data to set.
        * @return This builder for chaining.
        */
-      public Builder setData(
-          java.lang.String value) {
+      public Builder setData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -571,28 +807,12 @@ public final class ResultMessageOuterClass {
         return this;
       }
       /**
-       * <code>string Data = 2;</code>
+       * <code>bytes Data = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearData() {
         
         data_ = getDefaultInstance().getData();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string Data = 2;</code>
-       * @param value The bytes for data to set.
-       * @return This builder for chaining.
-       */
-      public Builder setDataBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        data_ = value;
         onChanged();
         return this;
       }
@@ -613,12 +833,12 @@ public final class ResultMessageOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:ResultMessage)
-    private static final ResultMessageOuterClass.ResultMessage DEFAULT_INSTANCE;
+    private static final com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new ResultMessageOuterClass.ResultMessage();
+      DEFAULT_INSTANCE = new com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage();
     }
 
-    public static ResultMessageOuterClass.ResultMessage getDefaultInstance() {
+    public static com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -643,7 +863,7 @@ public final class ResultMessageOuterClass {
     }
 
     @java.lang.Override
-    public ResultMessageOuterClass.ResultMessage getDefaultInstanceForType() {
+    public com.HyChat.server.Message.ResultMessageOuterClass.ResultMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -663,20 +883,25 @@ public final class ResultMessageOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023ResultMessage.proto\"-\n\rResultMessage\022\016" +
-      "\n\006Result\030\001 \001(\010\022\014\n\004Data\030\002 \001(\tB\032\n\030com.HyCh" +
-      "at.server.Handleb\006proto3"
+      "\n\023ResultMessage.proto\032\037google/protobuf/t" +
+      "imestamp.proto\"m\n\rResultMessage\022\016\n\006Resul" +
+      "t\030\001 \001(\010\022,\n\010sendTime\030\004 \001(\0132\032.google.proto" +
+      "buf.Timestamp\022\020\n\010MessType\030\003 \001(\005\022\014\n\004Data\030" +
+      "\002 \001(\014B\033\n\031com.HyChat.server.Messageb\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_ResultMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_ResultMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ResultMessage_descriptor,
-        new java.lang.String[] { "Result", "Data", });
+        new java.lang.String[] { "Result", "SendTime", "MessType", "Data", });
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

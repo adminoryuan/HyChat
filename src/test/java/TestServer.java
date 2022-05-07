@@ -1,6 +1,3 @@
-import com.HyChat.server.Message.Message;
-import com.HyChat.server.Message.ResultMessageOuterClass;
-import com.HyChat.server.Message.UserMessageOuterClass;
 import com.google.protobuf.ByteString;
 import org.junit.Test;
 

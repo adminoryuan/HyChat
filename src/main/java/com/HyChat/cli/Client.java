@@ -1,7 +1,7 @@
 package com.HyChat.cli;
 
-import com.HyChat.server.Message.Message;
 import com.HyChat.server.Message.OnLineUser;
+import com.HyChat.server.Message.ReqMessage;
 import com.HyChat.server.Message.ResultMessageOuterClass;
 import com.HyChat.server.Message.UserMessageOuterClass;
 import com.google.protobuf.ByteString;
@@ -47,8 +47,12 @@ public class Client {
     /**
      * 群发消息
      */
-    public void Mass(){
-
+    public void Mass() throws IOException {
+        ReqMessage.MegBody.Builder megBody= ReqMessage.MegBody.newBuilder();
+        megBody.setMegType(1);
+        megBody.setIsMass(true);
+        megBody.setBody(ByteString.copyFrom( "a".getBytes()));
+        socket.getOutputStream().write(megBody.build().toByteArray());
     }
 
     /**
@@ -56,7 +60,7 @@ public class Client {
      * @throws IOException
      */
     public void OnLine() throws IOException {
-        Message.MegBody.Builder mBody = Message.MegBody.newBuilder();
+        ReqMessage.MegBody.Builder mBody = ReqMessage.MegBody.newBuilder();
         mBody.setMegType(4);
         mBody.setToken(token);
         socket.getOutputStream().write(mBody.build().toByteArray());
@@ -84,7 +88,7 @@ public class Client {
         System.out.println("请输入你的密码");
         String password=scanner.next();
 
-        Message.MegBody.Builder mBody = Message.MegBody.newBuilder();
+        ReqMessage.MegBody.Builder mBody = ReqMessage.MegBody.newBuilder();
         mBody.setMegType(1);
         UserMessageOuterClass.UserMessage.Builder userMessage = UserMessageOuterClass.UserMessage.newBuilder();
         userMessage.setAdmin(admin);
@@ -102,7 +106,7 @@ public class Client {
             System.out.println("账户或者密码错误，请重新登录");
         }else{
             System.out.println("登录成功！");
-            this.token=resultMessage.getData();
+            this.token=resultMessage.getData().toString();
         }
     }
 
@@ -119,5 +123,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        new Scanner(System.in).next();
     }
 }

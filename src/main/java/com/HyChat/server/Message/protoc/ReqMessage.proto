@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.HyChat.server.Message";
+//客户端发送的给服务器的消息
+message MegBody {
+    int32 MegType=1;
+    bool IsMass=6; //是否群发
+    string Target =4;//目标用户
+    string token=5;
+    google.protobuf.Timestamp time=2; //发送时间
+    bytes Body=3;
+}

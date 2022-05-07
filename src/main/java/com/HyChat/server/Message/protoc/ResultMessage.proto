@@ -1,11 +1,15 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
 
-option java_package = "com.HyChat.server.Handle";
-
+option java_package = "com.HyChat.server.Message";
+// 服务端返回客户端的消息
 message  ResultMessage{
 
     bool Result=1;
 
-    string Data=2;
+    google.protobuf.Timestamp sendTime=4;
+    int32 MessType=3;//消息类型
+
+    bytes Data=2;
 }

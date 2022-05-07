@@ -2,7 +2,6 @@ package com.HyChat.server;
 
 import com.HyChat.server.Handle.MegHandel;
 import com.HyChat.server.Handle.MegHandelimpl;
-import com.HyChat.server.Message.Message;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
@@ -19,10 +18,11 @@ import java.util.concurrent.*;
  * 监听读写事件
  */
 public class FollowerServer {
-
-
-
     private Selector selector;
+
+    /**
+     * 消息转发器
+     */
     private MegHandel megHandel;
 
     private ExecutorService factory;
@@ -30,7 +30,7 @@ public class FollowerServer {
     public  FollowerServer() throws IOException {
         this.selector = Selector.open();
         factory= Executors.newCachedThreadPool();
-       megHandel=new MegHandelimpl();
+        megHandel=new MegHandelimpl();
         new Thread(new Runnable() {
             @SneakyThrows
             @Override
@@ -40,9 +40,8 @@ public class FollowerServer {
         }).start();
     }
     public  void Regist(SocketChannel channel) throws ClosedChannelException {
-        System.out.println("注册读写事件");
-        channel.register(selector, SelectionKey.OP_READ);
 
+        channel.register(selector, SelectionKey.OP_READ);
     }
     private void ReadPoll() throws IOException {
         while (true){
@@ -60,7 +59,13 @@ public class FollowerServer {
                         SocketChannel channel = (SocketChannel) currKey.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         int length = channel.read(buffer);
-                        if (length>0)
+                        if (length==-1){
+                            //下线了
+                            MegHandelimpl.Offline(currKey);
+                            currKey.cancel();
+                            //selector.keys().remove(currKey);
+                            continue;
+                        }
                         try {
                             factory.execute(new Runnable() {
                                 @SneakyThrows

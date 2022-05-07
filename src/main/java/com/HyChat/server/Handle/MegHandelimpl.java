@@ -1,12 +1,14 @@
 package com.HyChat.server.Handle;
 
 import com.HyChat.server.Entity.User;
-import com.HyChat.server.Message.Message;
 import com.HyChat.server.Message.OnLineUser;
+import com.HyChat.server.Message.ReqMessage;
 import com.HyChat.server.Message.ResultMessageOuterClass;
 import com.HyChat.server.Message.UserMessageOuterClass;
 import com.HyChat.server.Service.ChatUserService;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -31,7 +33,7 @@ public class MegHandelimpl extends MegHandel{
     }
 
     @Override
-    void TexHandle(Message.MegBody body) {
+    void TexHandle(ReqMessage.MegBody body) {
         if (body.getIsMass()){
             try {
                 //群发消息
@@ -53,7 +55,7 @@ public class MegHandelimpl extends MegHandel{
      * @param channel
      */
     @Override
-    void LoginHandle(Message.MegBody body, SelectionKey channel) {
+    void LoginHandle(ReqMessage.MegBody body, SelectionKey channel) {
         try {
             UserMessageOuterClass.UserMessage userMessage = UserMessageOuterClass.UserMessage.parseFrom(body.getBody().toByteArray());
 
@@ -70,7 +72,7 @@ public class MegHandelimpl extends MegHandel{
             //jwt 为空
             resultMessage.setResult(!res.equals("账户或者密码错误"));
 
-            resultMessage.setData(res);
+            resultMessage.setData(ByteString.copyFrom(res.getBytes()));
 
             SocketChannel channel1 =(SocketChannel) channel.channel();
 
@@ -85,13 +87,13 @@ public class MegHandelimpl extends MegHandel{
     }
 
     @Override
-    void BinaryHandle(Message.MegBody body) {
+    void BinaryHandle(ReqMessage.MegBody body) {
 
     }
 
     @Override
     void GetOnLine(SelectionKey channel) throws IOException {
-        OnLineUser.OnlineUserMeg.Builder Meg=OnLineUser.OnlineUserMeg.newBuilder();
+        OnLineUser.OnlineUserMeg.Builder Meg= OnLineUser.OnlineUserMeg.newBuilder();
         System.out.printf("当前在线用户数%d",OnlineUser.size());
         for (String s : OnlineUser.keySet()) {
             User user = ChatUserService.GetUser(s);

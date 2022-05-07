@@ -1,6 +1,6 @@
 package com.HyChat.server.Handle;
 
-import com.HyChat.server.Message.Message;
+import com.HyChat.server.Message.ReqMessage;
 import com.HyChat.server.untity.Messageuntity;
 import com.HyChat.server.untity.VerifUntity;
 
@@ -20,6 +20,13 @@ public  abstract class MegHandel{
      */
     protected static Map<String,SelectionKey> OnlineUser=new ConcurrentHashMap<>();
     private VerifUntity untity=new VerifUntity();
+
+    /**
+     * 当用户下线时
+     */
+    public static void Offline(SelectionKey key){
+        OnlineUser.values().remove(key);
+    }
     /**
      * 定义处理消息
      * BodyType
@@ -28,7 +35,7 @@ public  abstract class MegHandel{
      * 3 位 二进制消息
      * @param body
      */
-    public void DoHandel(Message.MegBody body, SelectionKey _ch) throws IOException {
+    public void DoHandel(ReqMessage.MegBody body, SelectionKey _ch) throws IOException {
 
 
         if (body.getMegType()==1){
@@ -71,20 +78,20 @@ public  abstract class MegHandel{
      * 处理文本消息
      * @param body
      */
-    abstract void TexHandle(Message.MegBody body);
+    abstract void TexHandle(ReqMessage.MegBody body);
 
     /**
      * 处理登录消息
      * @param body
      * @param channel
      */
-    abstract void LoginHandle(Message.MegBody body,SelectionKey channel);
+    abstract void LoginHandle(ReqMessage.MegBody body, SelectionKey channel);
 
     /**
      * 处理二进制消息 文件等。
      * @param body
      */
-    abstract void BinaryHandle(Message.MegBody body);
+    abstract void BinaryHandle(ReqMessage.MegBody body);
 
     abstract void GetOnLine(SelectionKey channel) throws IOException;
 

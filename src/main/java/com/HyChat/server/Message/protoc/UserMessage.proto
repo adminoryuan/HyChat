@@ -1,7 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.HyChat.server.Handle";
-
+option java_package = "com.HyChat.server.Message";
 message UserMessage {
     string Admin =1;
     string PassWord =2;

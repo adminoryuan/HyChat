@@ -122,15 +122,15 @@ public final class UserMessageOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return UserMessageOuterClass.internal_static_UserMessage_descriptor;
+      return com.HyChat.server.Message.UserMessageOuterClass.internal_static_UserMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return UserMessageOuterClass.internal_static_UserMessage_fieldAccessorTable
+      return com.HyChat.server.Message.UserMessageOuterClass.internal_static_UserMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              UserMessageOuterClass.UserMessage.class, UserMessageOuterClass.UserMessage.Builder.class);
+              com.HyChat.server.Message.UserMessageOuterClass.UserMessage.class, com.HyChat.server.Message.UserMessageOuterClass.UserMessage.Builder.class);
     }
 
     public static final int ADMIN_FIELD_NUMBER = 1;
@@ -250,10 +250,10 @@ public final class UserMessageOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof UserMessageOuterClass.UserMessage)) {
+      if (!(obj instanceof com.HyChat.server.Message.UserMessageOuterClass.UserMessage)) {
         return super.equals(obj);
       }
-      UserMessageOuterClass.UserMessage other = (UserMessageOuterClass.UserMessage) obj;
+      com.HyChat.server.Message.UserMessageOuterClass.UserMessage other = (com.HyChat.server.Message.UserMessageOuterClass.UserMessage) obj;
 
       if (!getAdmin()
           .equals(other.getAdmin())) return false;
@@ -279,69 +279,69 @@ public final class UserMessageOuterClass {
       return hash;
     }
 
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(byte[] data)
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(java.io.InputStream input)
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static UserMessageOuterClass.UserMessage parseDelimitedFrom(java.io.InputStream input)
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static UserMessageOuterClass.UserMessage parseDelimitedFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static UserMessageOuterClass.UserMessage parseFrom(
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -354,7 +354,7 @@ public final class UserMessageOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(UserMessageOuterClass.UserMessage prototype) {
+    public static Builder newBuilder(com.HyChat.server.Message.UserMessageOuterClass.UserMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -375,21 +375,21 @@ public final class UserMessageOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:UserMessage)
-        UserMessageOuterClass.UserMessageOrBuilder {
+        com.HyChat.server.Message.UserMessageOuterClass.UserMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return UserMessageOuterClass.internal_static_UserMessage_descriptor;
+        return com.HyChat.server.Message.UserMessageOuterClass.internal_static_UserMessage_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return UserMessageOuterClass.internal_static_UserMessage_fieldAccessorTable
+        return com.HyChat.server.Message.UserMessageOuterClass.internal_static_UserMessage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                UserMessageOuterClass.UserMessage.class, UserMessageOuterClass.UserMessage.Builder.class);
+                com.HyChat.server.Message.UserMessageOuterClass.UserMessage.class, com.HyChat.server.Message.UserMessageOuterClass.UserMessage.Builder.class);
       }
 
-      // Construct using com.HyChat.server.Handle.UserMessageOuterClass.UserMessage.newBuilder()
+      // Construct using com.HyChat.server.Message.UserMessageOuterClass.UserMessage.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -417,17 +417,17 @@ public final class UserMessageOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return UserMessageOuterClass.internal_static_UserMessage_descriptor;
+        return com.HyChat.server.Message.UserMessageOuterClass.internal_static_UserMessage_descriptor;
       }
 
       @java.lang.Override
-      public UserMessageOuterClass.UserMessage getDefaultInstanceForType() {
-        return UserMessageOuterClass.UserMessage.getDefaultInstance();
+      public com.HyChat.server.Message.UserMessageOuterClass.UserMessage getDefaultInstanceForType() {
+        return com.HyChat.server.Message.UserMessageOuterClass.UserMessage.getDefaultInstance();
       }
 
       @java.lang.Override
-      public UserMessageOuterClass.UserMessage build() {
-        UserMessageOuterClass.UserMessage result = buildPartial();
+      public com.HyChat.server.Message.UserMessageOuterClass.UserMessage build() {
+        com.HyChat.server.Message.UserMessageOuterClass.UserMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -435,8 +435,8 @@ public final class UserMessageOuterClass {
       }
 
       @java.lang.Override
-      public UserMessageOuterClass.UserMessage buildPartial() {
-        UserMessageOuterClass.UserMessage result = new UserMessageOuterClass.UserMessage(this);
+      public com.HyChat.server.Message.UserMessageOuterClass.UserMessage buildPartial() {
+        com.HyChat.server.Message.UserMessageOuterClass.UserMessage result = new com.HyChat.server.Message.UserMessageOuterClass.UserMessage(this);
         result.admin_ = admin_;
         result.passWord_ = passWord_;
         onBuilt();
@@ -477,16 +477,16 @@ public final class UserMessageOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof UserMessageOuterClass.UserMessage) {
-          return mergeFrom((UserMessageOuterClass.UserMessage)other);
+        if (other instanceof com.HyChat.server.Message.UserMessageOuterClass.UserMessage) {
+          return mergeFrom((com.HyChat.server.Message.UserMessageOuterClass.UserMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(UserMessageOuterClass.UserMessage other) {
-        if (other == UserMessageOuterClass.UserMessage.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.HyChat.server.Message.UserMessageOuterClass.UserMessage other) {
+        if (other == com.HyChat.server.Message.UserMessageOuterClass.UserMessage.getDefaultInstance()) return this;
         if (!other.getAdmin().isEmpty()) {
           admin_ = other.admin_;
           onChanged();
@@ -510,11 +510,11 @@ public final class UserMessageOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        UserMessageOuterClass.UserMessage parsedMessage = null;
+        com.HyChat.server.Message.UserMessageOuterClass.UserMessage parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (UserMessageOuterClass.UserMessage) e.getUnfinishedMessage();
+          parsedMessage = (com.HyChat.server.Message.UserMessageOuterClass.UserMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -692,12 +692,12 @@ public final class UserMessageOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:UserMessage)
-    private static final UserMessageOuterClass.UserMessage DEFAULT_INSTANCE;
+    private static final com.HyChat.server.Message.UserMessageOuterClass.UserMessage DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new UserMessageOuterClass.UserMessage();
+      DEFAULT_INSTANCE = new com.HyChat.server.Message.UserMessageOuterClass.UserMessage();
     }
 
-    public static UserMessageOuterClass.UserMessage getDefaultInstance() {
+    public static com.HyChat.server.Message.UserMessageOuterClass.UserMessage getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -722,7 +722,7 @@ public final class UserMessageOuterClass {
     }
 
     @java.lang.Override
-    public UserMessageOuterClass.UserMessage getDefaultInstanceForType() {
+    public com.HyChat.server.Message.UserMessageOuterClass.UserMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -743,8 +743,8 @@ public final class UserMessageOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\021UserMessage.proto\".\n\013UserMessage\022\r\n\005Ad" +
-      "min\030\001 \001(\t\022\020\n\010PassWord\030\002 \001(\tB\032\n\030com.HyCha" +
-      "t.server.Handleb\006proto3"
+      "min\030\001 \001(\t\022\020\n\010PassWord\030\002 \001(\tB\033\n\031com.HyCha" +
+      "t.server.Messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

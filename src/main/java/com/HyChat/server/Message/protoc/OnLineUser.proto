@@ -1,4 +1,6 @@
 syntax = "proto3";
+
+option java_package = "com.HyChat.server.Message";
 message user {
     string admin=1;
     bool sex=2;
