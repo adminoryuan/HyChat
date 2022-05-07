@@ -1,8 +1,7 @@
-import com.HyChat.server.Handle.Message.Message;
-import com.HyChat.server.Handle.Message.ResultMessageOuterClass;
-import com.HyChat.server.Handle.Message.UserMessageOuterClass;
+import com.HyChat.server.Message.Message;
+import com.HyChat.server.Message.ResultMessageOuterClass;
+import com.HyChat.server.Message.UserMessageOuterClass;
 import com.google.protobuf.ByteString;
-import lombok.SneakyThrows;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -100,7 +99,6 @@ public class TestServer {
         userMessage.setAdmin("admin1");
         userMessage.setPassWord("passwod");
         mBody.setBody(ByteString.copyFrom(userMessage.build().toByteArray()));
-
 
         socket.getOutputStream().write(mBody.build().toByteArray());
 

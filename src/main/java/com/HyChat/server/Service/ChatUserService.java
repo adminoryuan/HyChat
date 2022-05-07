@@ -46,4 +46,7 @@ public class ChatUserService {
         return "账户或者密码错误";
 
     }
+    public static User GetUser(String admin){
+        return chatUserMap.get(admin);
+    }
 }

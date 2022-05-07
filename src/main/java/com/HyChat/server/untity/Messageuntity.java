@@ -1,6 +1,6 @@
 package com.HyChat.server.untity;
 
-import com.HyChat.server.Handle.Message.ResultMessageOuterClass;
+import com.HyChat.server.Message.ResultMessageOuterClass;
 
 /**
  * 封装一些常用消息

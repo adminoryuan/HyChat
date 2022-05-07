@@ -2,7 +2,7 @@ package com.HyChat.server;
 
 import com.HyChat.server.Handle.MegHandel;
 import com.HyChat.server.Handle.MegHandelimpl;
-import com.HyChat.server.Handle.Message.Message;
+import com.HyChat.server.Message.Message;
 import lombok.SneakyThrows;
 
 import java.io.IOException;

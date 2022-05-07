@@ -1,10 +1,11 @@
 package com.HyChat.server.Handle;
 
-import com.HyChat.server.Handle.Message.Message;
-import com.HyChat.server.Handle.Message.ResultMessageOuterClass;
-import com.HyChat.server.Handle.Message.UserMessageOuterClass;
+import com.HyChat.server.Entity.User;
+import com.HyChat.server.Message.Message;
+import com.HyChat.server.Message.OnLineUser;
+import com.HyChat.server.Message.ResultMessageOuterClass;
+import com.HyChat.server.Message.UserMessageOuterClass;
 import com.HyChat.server.Service.ChatUserService;
-import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import java.io.IOException;
@@ -62,11 +63,12 @@ public class MegHandelimpl extends MegHandel{
 
             if (!res.equals("账户或者密码错误")){
                 //添加用户和selectionkey 的绑定关系
+
                 OnlineUser.put(userMessage.getAdmin(),channel);
             }
 
             //jwt 为空
-            resultMessage.setResult(res.equals("账户或者密码错误"));
+            resultMessage.setResult(!res.equals("账户或者密码错误"));
 
             resultMessage.setData(res);
 
@@ -85,5 +87,21 @@ public class MegHandelimpl extends MegHandel{
     @Override
     void BinaryHandle(Message.MegBody body) {
 
+    }
+
+    @Override
+    void GetOnLine(SelectionKey channel) throws IOException {
+        OnLineUser.OnlineUserMeg.Builder Meg=OnLineUser.OnlineUserMeg.newBuilder();
+        System.out.printf("当前在线用户数%d",OnlineUser.size());
+        for (String s : OnlineUser.keySet()) {
+            User user = ChatUserService.GetUser(s);
+            OnLineUser.user.Builder User=OnLineUser.user.newBuilder();
+            User.setAdmin(s);
+            User.setSex(user.isSex());
+            User.setAge(12);
+            User.setName(user.getName());
+            Meg.addOnlineProson(User);
+        }
+        WriteMessage(channel,Meg.build().toByteArray());
     }
 }

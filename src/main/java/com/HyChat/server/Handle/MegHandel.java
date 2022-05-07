@@ -1,9 +1,8 @@
 package com.HyChat.server.Handle;
 
-import com.HyChat.server.Handle.Message.Message;
+import com.HyChat.server.Message.Message;
 import com.HyChat.server.untity.Messageuntity;
 import com.HyChat.server.untity.VerifUntity;
-import com.google.protobuf.ByteString;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -29,7 +28,7 @@ public  abstract class MegHandel{
      * 3 位 二进制消息
      * @param body
      */
-    public void DoHandel(Message.MegBody body, SelectionKey _ch){
+    public void DoHandel(Message.MegBody body, SelectionKey _ch) throws IOException {
 
 
         if (body.getMegType()==1){
@@ -51,6 +50,9 @@ public  abstract class MegHandel{
                 break;
             case 3:
                 BinaryHandle(body);
+                break;
+            case 4:
+                GetOnLine(_ch);
                 break;
         }
     }
@@ -84,5 +86,6 @@ public  abstract class MegHandel{
      */
     abstract void BinaryHandle(Message.MegBody body);
 
+    abstract void GetOnLine(SelectionKey channel) throws IOException;
 
 }
