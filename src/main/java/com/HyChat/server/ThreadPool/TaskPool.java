@@ -18,14 +18,16 @@ public class TaskPool {
             return new Thread(r);
         }
     }
+
     private static ThreadPoolExecutor service ;
+
     private static final int MAXThread=1024;
     static {
         //使用ArrayBlockingQueue 防止线程快速增长导致内存溢出
        service= new ThreadPoolExecutor(
-                1,
-                100,
-                10,
+                20, //即使没有也会执行
+                1000,
+                20,
                 TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<Runnable>(MAXThread),
                 new ThenThreadFactory());
