@@ -37,7 +37,7 @@ public class ChatUserService {
      * @return
      */
     public String Login(String admin, String Password){
-        if (!chatUserMap.containsKey(admin)){
+        if (chatUserMap.containsKey(admin)){
             User user=chatUserMap.get(admin);
             if (user.getAdmin().equals(admin)&&user.getPassword().equals(Password)){
                 return JwtUntity.EncoderJwt(user);

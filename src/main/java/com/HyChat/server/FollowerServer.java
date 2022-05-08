@@ -3,6 +3,7 @@ package com.HyChat.server;
 import com.HyChat.server.Handle.MegHandel;
 import com.HyChat.server.Handle.MegHandelimpl;
 import com.HyChat.server.Message.ReqMessage;
+import com.HyChat.server.ThreadPool.TaskPool;
 import com.HyChat.server.untity.LoggerUntity;
 import lombok.SneakyThrows;
 
@@ -14,7 +15,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.logging.Logger;
+
 /**
  * reactor模型 的子reactor
  * 监听读写事件
@@ -74,15 +75,17 @@ public class FollowerServer {
                             continue;
                         }
                         try {
-                            factory.execute(new Runnable() {
+                            TaskPool.Sumit(new Runnable() {
                                 @SneakyThrows
                                 @Override
                                 public void run() {
-
-                                   ReqMessage.MegBody megBody = ReqMessage.MegBody.parseFrom(Arrays.copyOfRange(buffer.array(),0,length));
-                                   LoggerUntity.LogInfo(String.format("发送给 %s 的消息",megBody.getTarget()));
-                                   megHandel.DoHandel(megBody,currKey);
-
+                                    ReqMessage.MegBody megBody = ReqMessage.MegBody.parseFrom(Arrays.copyOfRange(buffer.array(),0,length));
+                                    LoggerUntity.LogInfo(String.format("发送给 %s 的消息",megBody.getTarget()));
+                                    try {
+                                        megHandel.DoHandel(megBody,currKey);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
 

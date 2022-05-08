@@ -1,6 +1,7 @@
 package com.HyChat.server.Handle;
 
 import com.HyChat.server.Message.ReqMessage;
+import com.HyChat.server.ThreadPool.TaskPool;
 import com.HyChat.server.untity.Messageuntity;
 import com.HyChat.server.untity.VerifUntity;
 
@@ -19,6 +20,7 @@ public  abstract class MegHandel{
      * 保存在线用户
      */
     protected static Map<String,SelectionKey> OnlineUser=new ConcurrentHashMap<>();
+
     private VerifUntity untity=new VerifUntity();
 
     /**
@@ -72,8 +74,18 @@ public  abstract class MegHandel{
      * @throws IOException
      */
     protected static void WriteMessage(SelectionKey CurrKey, byte[] body) throws IOException {
-        SocketChannel socketChannel = (SocketChannel) CurrKey.channel();
-        socketChannel.write(ByteBuffer.wrap(body));
+        TaskPool.Sumit(new Runnable() {
+            @Override
+            public void run() {
+
+                SocketChannel socketChannel = (SocketChannel) CurrKey.channel();
+                try {
+                    socketChannel.write(ByteBuffer.wrap(body));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
     /**
      * 处理文本消息

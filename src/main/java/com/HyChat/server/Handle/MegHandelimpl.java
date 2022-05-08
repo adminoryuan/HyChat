@@ -6,12 +6,10 @@ import com.HyChat.server.Message.ReqMessage;
 import com.HyChat.server.Message.ResultMessageOuterClass;
 import com.HyChat.server.Message.UserMessageOuterClass;
 import com.HyChat.server.Service.ChatUserService;
-import com.HyChat.server.untity.JwtUntity;
+import com.HyChat.server.ThreadPool.TaskPool;
 import com.HyChat.server.untity.LoggerUntity;
-import com.HyChat.server.untity.VerifUntity;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
 import com.google.protobuf.Timestamp;
 
 import java.io.IOException;
@@ -21,13 +19,13 @@ import java.nio.channels.SocketChannel;
 
 public class MegHandelimpl extends MegHandel{
 
-    static class MessageForard{
+
         /**
          * 群发消息
          * @param bodys
          * @throws IOException
          */
-        void  Mass (byte[] bodys) throws IOException {
+     public  void  Mass (byte[] bodys) throws IOException {
             ResultMessageOuterClass.ResultMessage.Builder res=ResultMessageOuterClass.ResultMessage.newBuilder();
             res.setResult(true);
             try {
@@ -43,17 +41,24 @@ public class MegHandelimpl extends MegHandel{
                 WriteMessage(key,res.build().toByteArray());
             }
         }
-    }
+
 
     @Override
     void TexHandle(ReqMessage.MegBody body) {
         if (body.getIsMass()){
-            try {
-                //群发消息
-                new MessageForard().Mass(body.getBody().toByteArray());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+                TaskPool.Sumit(new Runnable() {
+                    @Override
+                    public void run() {
+                        //群发消息
+                        try {
+                            Mass(body.getBody().toByteArray());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
             return;
         }
         ResultMessageOuterClass.ResultMessage.Builder meg= ResultMessageOuterClass.ResultMessage.newBuilder();

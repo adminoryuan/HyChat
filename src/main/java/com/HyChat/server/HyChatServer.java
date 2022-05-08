@@ -21,7 +21,10 @@ public class HyChatServer {
 
     private Selector selector;
 
-    private final int MaxFollwer=3;
+    /**
+     * cpu 核心的两倍
+     */
+    private final int MaxFollwer=Runtime.getRuntime().availableProcessors()*2;;
 
     private ServerSocketChannel socketChannel;
 
