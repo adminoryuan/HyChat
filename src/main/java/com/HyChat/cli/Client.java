@@ -17,10 +17,15 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 简易客户端
+ *
  */
 public class Client {
 
-    private BlockingDeque< ResultMessageOuterClass.ResultMessage> blockingDeque=new LinkedBlockingDeque<>();
+    /**
+     * 做为一个消息通道
+     */
+    private BlockingDeque<ResultMessageOuterClass.ResultMessage> blockingDeque=new LinkedBlockingDeque<>();
+
 
     private Scanner scanner=new Scanner(System.in);
 
@@ -33,6 +38,7 @@ public class Client {
         }
     }
     private String token="";
+
     /**
      * 功能列表
      */
@@ -40,7 +46,6 @@ public class Client {
 
         System.out.println("1- 登录");
         System.out.println("2- 查看所有在线用户");
-
         System.out.println("3- 群发消息");
         System.out.println("4- 私发消息");
 
@@ -51,7 +56,8 @@ public class Client {
                Login();break;
            case 2:
                OnLine();break;
-           case 3:Mass();break;
+           case 3:
+               Mass();break;
            case 4:
                Hair();break;
 
@@ -59,7 +65,11 @@ public class Client {
        FuncList();
     }
 
-
+    /**
+     * 监听读
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void OnRead() throws IOException, InterruptedException {
         while (true) {
             byte[] bodys = new byte[1024];

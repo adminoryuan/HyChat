@@ -7,6 +7,7 @@ import com.HyChat.server.Message.ResultMessageOuterClass;
 import com.HyChat.server.Message.UserMessageOuterClass;
 import com.HyChat.server.Service.ChatUserService;
 import com.HyChat.server.untity.JwtUntity;
+import com.HyChat.server.untity.LoggerUntity;
 import com.HyChat.server.untity.VerifUntity;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -37,9 +38,8 @@ public class MegHandelimpl extends MegHandel{
             res.setData(ByteString.copyFrom(bodys));
             res.setMessType(3);
 
-            System.out.println("群发消息");
-            System.out.println(OnlineUser.values().size());
-            for (SelectionKey key : OnlineUser.values()) {
+           LoggerUntity.LogWaring("群发消息");
+           for (SelectionKey key : OnlineUser.values()) {
                 WriteMessage(key,res.build().toByteArray());
             }
         }
@@ -121,7 +121,7 @@ public class MegHandelimpl extends MegHandel{
         ResultMessageOuterClass.ResultMessage.Builder res=ResultMessageOuterClass.ResultMessage.newBuilder();
 
 
-        System.out.printf("当前在线用户数%d",OnlineUser.size());
+        LoggerUntity.LogInfo(String.format("当前在线用户数%d", OnlineUser.size()));
 
         for (String s : OnlineUser.keySet()) {
             User user = ChatUserService.GetUser(s);

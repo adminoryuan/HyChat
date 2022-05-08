@@ -2,6 +2,7 @@ package com.HyChat.server;
 
 import com.HyChat.server.Handle.MegHandel;
 import com.HyChat.server.Handle.MegHandelimpl;
+import com.HyChat.server.untity.LoggerUntity;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -87,7 +88,7 @@ public class HyChatServer {
                         followerServer[0].Regist(channel);
 
 
-                        System.out.println("收到链接");
+                        LoggerUntity.LogInfo("收到链接");
                     }
                 }
             }
