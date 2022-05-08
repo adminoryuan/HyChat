@@ -2,6 +2,7 @@ package com.HyChat.server;
 
 import com.HyChat.server.Handle.MegHandel;
 import com.HyChat.server.Handle.MegHandelimpl;
+import com.HyChat.server.Message.ReqMessage;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
@@ -72,8 +73,9 @@ public class FollowerServer {
                                 @Override
                                 public void run() {
 
-                                    Message.MegBody megBody = Message.MegBody.parseFrom(Arrays.copyOfRange(buffer.array(),0,length));
-                                    megHandel.DoHandel(megBody,currKey);
+                                   ReqMessage.MegBody megBody = ReqMessage.MegBody.parseFrom(Arrays.copyOfRange(buffer.array(),0,length));
+
+                                   megHandel.DoHandel(megBody,currKey);
 
                                 }
                             });

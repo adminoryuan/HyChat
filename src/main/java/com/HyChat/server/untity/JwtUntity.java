@@ -27,7 +27,7 @@ public class JwtUntity {
                 .setIssuedAt(new Date())
                 .setId("1")
                 .setClaims(hashMap)
-                .setExpiration(new Date(System.currentTimeMillis()+5000))
+                .setExpiration(new Date(System.currentTimeMillis()+60*10000))
                 .signWith(SignatureAlgorithm.HS256,PrivateKey).compact();
     }
 

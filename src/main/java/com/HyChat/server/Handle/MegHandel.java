@@ -44,6 +44,7 @@ public  abstract class MegHandel{
         }
         String admin=untity.VerifToken(body.getToken());
         if (admin==null){
+            System.out.println("当前用户token 已经失效");
             try {
                 WriteMessage(_ch,Messageuntity.Unauthorized().build().toByteArray());
             } catch (IOException e) {

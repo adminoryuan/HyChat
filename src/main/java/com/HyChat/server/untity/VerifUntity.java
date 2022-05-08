@@ -11,6 +11,7 @@ public class VerifUntity {
      * @return 错误返回null 正确返回用户名
      */
     public String VerifToken(String token){
+        if (token==null ||token.equals("")) return null;
        return JwtUntity.DecodingJwt(token);
     }
 }

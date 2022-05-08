@@ -6,9 +6,12 @@ import com.HyChat.server.Message.ReqMessage;
 import com.HyChat.server.Message.ResultMessageOuterClass;
 import com.HyChat.server.Message.UserMessageOuterClass;
 import com.HyChat.server.Service.ChatUserService;
+import com.HyChat.server.untity.JwtUntity;
+import com.HyChat.server.untity.VerifUntity;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
+import com.google.protobuf.Timestamp;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -24,10 +27,20 @@ public class MegHandelimpl extends MegHandel{
          * @throws IOException
          */
         void  Mass (byte[] bodys) throws IOException {
+            ResultMessageOuterClass.ResultMessage.Builder res=ResultMessageOuterClass.ResultMessage.newBuilder();
+            res.setResult(true);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            res.setData(ByteString.copyFrom(bodys));
+            res.setMessType(3);
+
             System.out.println("群发消息");
             System.out.println(OnlineUser.values().size());
             for (SelectionKey key : OnlineUser.values()) {
-                WriteMessage(key,"jell".getBytes());
+                WriteMessage(key,res.build().toByteArray());
             }
         }
     }
@@ -37,15 +50,24 @@ public class MegHandelimpl extends MegHandel{
         if (body.getIsMass()){
             try {
                 //群发消息
-                new MessageForard().Mass(body.toByteArray());
+                new MessageForard().Mass(body.getBody().toByteArray());
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return;
         }
-        byte[] meg= body.getBody().toByteArray();
+        ResultMessageOuterClass.ResultMessage.Builder meg= ResultMessageOuterClass.ResultMessage.newBuilder();
 
-        System.out.println(new String(meg));
+        meg.setMessType(3);
+        meg.setData(body.getBody());
+        meg.setResult(true);
+
+        try {
+            WriteMessage(OnlineUser.get(body.getTarget()),meg.build().toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -57,12 +79,13 @@ public class MegHandelimpl extends MegHandel{
     @Override
     void LoginHandle(ReqMessage.MegBody body, SelectionKey channel) {
         try {
+            System.out.println("登录....");
             UserMessageOuterClass.UserMessage userMessage = UserMessageOuterClass.UserMessage.parseFrom(body.getBody().toByteArray());
 
             String res= new ChatUserService().Login(userMessage.getAdmin(),userMessage.getPassWord());
 
             ResultMessageOuterClass.ResultMessage.Builder resultMessage= ResultMessageOuterClass.ResultMessage.newBuilder();
-
+            resultMessage.setMessType(1);
             if (!res.equals("账户或者密码错误")){
                 //添加用户和selectionkey 的绑定关系
 
@@ -94,7 +117,12 @@ public class MegHandelimpl extends MegHandel{
     @Override
     void GetOnLine(SelectionKey channel) throws IOException {
         OnLineUser.OnlineUserMeg.Builder Meg= OnLineUser.OnlineUserMeg.newBuilder();
+
+        ResultMessageOuterClass.ResultMessage.Builder res=ResultMessageOuterClass.ResultMessage.newBuilder();
+
+
         System.out.printf("当前在线用户数%d",OnlineUser.size());
+
         for (String s : OnlineUser.keySet()) {
             User user = ChatUserService.GetUser(s);
             OnLineUser.user.Builder User=OnLineUser.user.newBuilder();
@@ -104,6 +132,11 @@ public class MegHandelimpl extends MegHandel{
             User.setName(user.getName());
             Meg.addOnlineProson(User);
         }
-        WriteMessage(channel,Meg.build().toByteArray());
+        res.setData(Meg.build().toByteString());
+        res.setResult(true);
+        res.setSendTime(Timestamp.newBuilder().build());
+        res.setMessType(2);
+
+        WriteMessage(channel,res.build().toByteArray());
     }
 }
