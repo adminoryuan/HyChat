@@ -1,7 +1,7 @@
 # HyChat
 - # 介绍
 
-  - HyChat是java nio 基于tcp协议 编写的一个 单机im 
+  - HyChat是java nio 基于tcp协议 主从reactor 网络模型 编写的一个高性能单机im 
   - 项目包括服务端和一个简易客户端
 
 - # 功能介绍
